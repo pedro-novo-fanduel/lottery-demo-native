@@ -2,11 +2,6 @@ import { StyleSheet, Platform, PermissionsAndroid } from "react-native";
 import { WebView } from "react-native-webview";
 import * as Location from "expo-location";
 import { useEffect, useRef } from "react";
-import { WEBVIEW_SERVER_IP } from "@env";
-
-if (!WEBVIEW_SERVER_IP) {
-  throw new Error("WEBVIEW_SERVER_IP missing");
-}
 
 export default function HomeScreen() {
   const webView = useRef<WebView>(null);
@@ -34,12 +29,11 @@ export default function HomeScreen() {
     <WebView
       ref={webView}
       style={styles.container}
-      originWhitelist={["*"]}
       javaScriptEnabled={true}
       domStorageEnabled={true}
       geolocationEnabled={true}
       cacheEnabled={false}
-      source={{ uri: WEBVIEW_SERVER_IP }}
+      source={{ uri: "http://localhost:3000" }}
       onMessage={(event) => console.log(event.nativeEvent.data)}
     />
   );
